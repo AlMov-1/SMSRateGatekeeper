@@ -1,0 +1,11 @@
+@SMSRateGatekeeper_HostAddress = https://localhost:44393
+
+POST {{SMSRateGatekeeper_HostAddress}}/PostSMS/
+Accept: application/json
+Content-Type: application/json
+{
+  "senderNumber": "999-999-9999",
+  "destinationNumber": "888-888-8888",
+  "messageText": "string"
+}
+###
