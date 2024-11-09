@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using SMSRateGatekeeper.Abstractions;
+using SMSRateGatekeeper.Notifications;
 using SMSRateGatekeeper.Options;
 using SMSRateGatekeeper.Services;
 
@@ -15,6 +16,14 @@ namespace SMSRateGatekeeper
             var config = builder.Configuration;
 
             // Add services to the container.
+            services.AddCors(ops => ops.AddPolicy("CorsPolicy", p =>
+                p.WithOrigins("http://127.0.0.1:5500")
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+                 .AllowCredentials()));
+
+            services.AddSignalR();
+
 
             services.Configure<SMSProviderOptions>(builder.Configuration.GetSection("SMSProvider"))
                     .AddControllers()
@@ -34,6 +43,9 @@ namespace SMSRateGatekeeper
 
            var app = builder.Build();
 
+
+            app.UseCors("CorsPolicy");
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -47,6 +59,8 @@ namespace SMSRateGatekeeper
 
 
             app.MapControllers();
+
+            app.MapHub<NotificationHub>("/notificationHub");
 
             app.Run();
         }

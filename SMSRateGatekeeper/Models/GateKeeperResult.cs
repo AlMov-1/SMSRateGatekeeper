@@ -9,8 +9,11 @@ namespace SMSRateGatekeeper.Models
     /// </summary>
     public class GateKeeperResult
     {
-        [JsonProperty("status")]
-        public int Status { get; set; }
+        //[JsonProperty("status")]
+        //public int Status { get; set; }
+
+        [JsonProperty("number")]
+        public string Number { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }
