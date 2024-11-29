@@ -77,7 +77,7 @@ namespace SMSRateGatekeeper.Services
 
         private void ResetCounter(object state)
         {
-            Interlocked.Exchange(ref _count, 0);
+            Interlocked.Exchange(ref _count, 0); // resetting to 0
 
             // Clear the queue
             while (_timestamps.TryDequeue(out _)) ;

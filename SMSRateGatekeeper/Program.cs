@@ -17,7 +17,7 @@ namespace SMSRateGatekeeper
 
             // Add services to the container.
             services.AddCors(ops => ops.AddPolicy("CorsPolicy", p =>
-                p.WithOrigins("http://127.0.0.1:5500")
+                p.WithOrigins("http://localhost:4200")
                  .AllowAnyMethod()
                  .AllowAnyHeader()
                  .AllowCredentials()));

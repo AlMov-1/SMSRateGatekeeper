@@ -7,8 +7,9 @@ using SMSRateGatekeeper.Options;
 namespace SMSRateGatekeeper.Services
 {
     /// <summary>
-    /// This thread safe class will keep track of smsm submission limits for each bisiness and
+    /// This thread safe class will keep track of sms submission limits for each bisiness and
     /// for the entire account, using reusable RateGuard class for both purposes.
+    /// It is registered as a singleton.
     /// </summary>
     public class ProviderLimitsGuard : IProviderLimitsGuard, IAsyncDisposable
     {
@@ -32,7 +33,7 @@ namespace SMSRateGatekeeper.Services
             // time span for which we will avaluate the counts
             var timeWindow = TimeSpan.FromSeconds(1);
 
-            // start gusarding posts fr entire account
+            // start guarding posts for entire account
             _acoountGuard = new RateGuard(accountLimit, timeWindow);
         }
 
